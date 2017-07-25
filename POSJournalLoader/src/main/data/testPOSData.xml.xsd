@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="POSJournal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Header">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:byte" name="SiteID"/>
+              <xs:element type="xs:string" name="SiteName"/>
+              <xs:element type="xs:byte" name="CommissionOperatorID"/>
+              <xs:element type="xs:string" name="CommissionOperator"/>
+              <xs:element type="xs:dateTime" name="DateTime"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Items">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ID">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:byte">
+                          <xs:enumeration value="123"/>
+                          <xs:enumeration value="124"/>
+                          <xs:enumeration value="125"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Name">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:enumeration value="Milk"/>
+                          <xs:enumeration value="Bread"/>
+                          <xs:enumeration value="Petrol"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Price">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:float">
+                          <xs:enumeration value="1.50"/>
+                          <xs:enumeration value="1.40"/>
+                          <xs:enumeration value="1.01"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Quantity">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:float">
+                          <xs:enumeration value="1"/>
+                          <xs:enumeration value="2"/>
+                          <xs:enumeration value="40.1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

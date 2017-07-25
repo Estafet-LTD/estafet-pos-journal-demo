@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<POSJournal>
+  <Header>
+    <SiteID>1</SiteID>
+    <SiteName>Croydon</SiteName>
+    <CommissionOperatorID>2</CommissionOperatorID>
+    <CommissionOperator>MRH</CommissionOperator>
+    <DateTime>2017-05-30T09:00:00</DateTime>
+  </Header>
+  <Items>
+    <Item>
+      <ID>123</ID>
+      <Name>Milk</Name>
+      <Price>1.50</Price>
+      <Quantity>1</Quantity>
+    </Item>
+    <Item>
+      <ID>124</ID>
+      <Name>Bread</Name>
+      <Price>1.40</Price>
+      <Quantity>2</Quantity>
+    </Item>
+    <Item>
+      <ID>125</ID>
+      <Name>Petrol</Name>
+      <Price>1.01</Price>
+      <Quantity>40.1</Quantity>
+    </Item>
+  </Items>
+</POSJournal>
+  

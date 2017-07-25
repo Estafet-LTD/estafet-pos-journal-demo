@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2014, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!--
+   This is the OSGi Blueprint XML file defining the Camel context and routes.  Because the file is in the
+   OSGI-INF/blueprint directory inside our JAR, it will be automatically activated as soon as the bundle is installed.
+
+   The root element for any OSGi Blueprint file is 'blueprint' - you also see the namespace definitions for both the Blueprint
+   and the Camel namespaces.
+-->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="              http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd              http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+    <!--
+      The namespace for the camelContext element in Blueprint is 'https://camel.apache.org/schema/blueprint'.
+
+      While it is not required to assign id's to the <camelContext/> and <route/> elements, it is a good idea
+      to set those for runtime management purposes (logging, JMX MBeans, ...)
+    -->
+    <bean class="org.apache.activemq.camel.component.ActiveMQComponent" id="activemq">
+        <property name="brokerURL" value="tcp://localhost:61616"/>
+        <property name="userName" value="admin"/>
+        <property name="password" value="admin"/>
+    </bean>
+    <camelContext id="pos-journal-receiver" xmlns="http://camel.apache.org/schema/blueprint">
+        <!--
+          Route takes XML file from work/input folder in Fuse installation and places it on topic. Example XML in src/main/data
+        -->
+        <route id="posJournalReceiver" shutdownRoute="Defer">
+            <from id="_fromInputFolder" uri="file:work/posjournal/input"/>
+            <log id="_logReceiveMessage" message="Started Processing ${file:name}"/>
+            <doTry id="_doTrySchemaValidation">
+                <to id="_validateAgainstSchema" uri="validator:classpath:schema/testPOSDataFlat.xsd"/>
+                <to id="_toLoadPOSJournalTopic" uri="activemq:topic:loadPOSJournal"/>
+                <doCatch id="_doCatchValidationException">
+                    <exception>org.apache.camel.ValidationException</exception>
+                    <log id="_logValidationException" message="File ${file:name} invalid.">
+                        <description>Log Validation Exception</description>
+                    </log>
+                    <to id="_toErrorFolder" uri="file:work/posjournal/error"/>
+                </doCatch>
+            </doTry>
+        </route>
+    </camelContext>
+</blueprint>

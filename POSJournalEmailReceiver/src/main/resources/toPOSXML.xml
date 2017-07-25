@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <configuration>
+        <wildcard>false</wildcard>
+    </configuration>
+    <mapping>
+        <class-a>model.POSJournal</class-a>
+        <class-b>generated_1498741525066.POSJournal</class-b>
+        <field>
+            <a>dateTime</a>
+            <b>item.dateTime</b>
+        </field>
+        <field>
+            <a>commissionOperatorID</a>
+            <b>item.commissionOperatorID</b>
+        </field>
+        <field>
+            <a>quantity</a>
+            <b>item.quantity</b>
+        </field>
+        <field>
+            <a>commissionOperator</a>
+            <b>item.commissionOperator</b>
+        </field>
+        <field>
+            <a>price</a>
+            <b>item.price</b>
+        </field>
+        <field>
+            <a>name</a>
+            <b>item.name</b>
+        </field>
+        <field>
+            <a>siteName</a>
+            <b>item.siteName</b>
+        </field>
+        <field>
+            <a>siteID</a>
+            <b>item.siteID</b>
+        </field>
+        <field>
+            <a>iD</a>
+            <b>item.id</b>
+        </field>
+    </mapping>
+</mappings>
