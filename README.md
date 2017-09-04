@@ -1,4 +1,4 @@
-POS Jounral Demo
+POS Journal Demo
 ======================
 
 This project contains three camel routes. The first POSJournalFileReceiver picks up XML files from a folder and places them on a topic. The second, POSJournalEmailReceiver picks up CSV attachments from Emails sent to an email address and places them on a topic. The third, POSJournal Loader subscribes to the topic and persists the records into a Postgres Database table.
